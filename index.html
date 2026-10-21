@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en-GB"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>ClassicHaul – Website Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--font-sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;--font-serif:"Source Serif 4",Georgia,serif;
+--color-fg:#1c1f23;--color-fg-muted:#5d6570;--color-bg:#f6f7f8;--color-panel:#ffffff;--color-border-line:#e1e4e8;
+--color-ok:#1a7f4b;--color-warn:#a8650a;--color-bad:#c0362c;
+--cds-font-size-caption:.8125rem;--cds-font-size-body:.9375rem;--cds-font-size-heading:1.125rem;--cds-font-size-title:1.75rem;--cds-font-weight-medium:500;
+--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:16px;--cds-gap-lg:24px;--cds-gap-xl:32px;--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-md:12px;--cds-pad-lg:20px;--cds-radius:10px;
+--cds-chart-grid:#e9ecef;--cds-chart-axis:#c3c9d0;--cds-chart-reference:#8a929c;--cds-chart-muted:#c3c9d0;--cds-chart-status-critical:#c0362c;
+--cds-surface-popover:#ffffff;--cds-border:#d5d9de;--cds-shadow-popover:0 4px 16px rgba(20,30,40,.12);--cds-text-secondary:#5d6570;--cds-dur-slow:.6s;--cds-ease-out:cubic-bezier(.2,.8,.2,1);
+--c1:#2563a8;--c2:#d9822b;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--color-fg:#e8eaed;--color-fg-muted:#9aa3ad;--color-bg:#121417;--color-panel:#1b1e22;--color-border-line:#2c3036;
+--color-ok:#4cc38a;--color-warn:#e2a54a;--color-bad:#f0776c;--cds-chart-grid:#2a2e34;--cds-chart-axis:#444a52;--cds-chart-reference:#7d858f;--cds-chart-muted:#444a52;--cds-chart-status-critical:#f0776c;
+--cds-surface-popover:#22262b;--cds-border:#363b42;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.4);--cds-text-secondary:#9aa3ad;--c1:#6aa6e8;--c2:#f0a35a;color-scheme:dark}}
+html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(--font-sans);}
+#dash-root{padding-block:32px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));}
+.dash-skeleton{color:transparent!important;background:var(--cds-chart-grid);border-radius:6px;}
+.bv-foot{max-width:72rem;margin:32px auto 0;color:var(--color-fg-muted);font-size:.8125rem}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+(function(){
+const RAW={"lighthouse": [{"device": "Mobile", "performance": 62, "accessibility": 89, "best_practices": 100, "seo": 100, "fcp_s": 5.2, "lcp_s": 11.1, "tbt_ms": 40, "cls": 0.0003, "page_kb": 1842}, {"device": "Desktop", "performance": 89, "accessibility": 93, "best_practices": 100, "seo": 100, "fcp_s": 1.2, "lcp_s": 1.8, "tbt_ms": 0, "cls": 0.001, "page_kb": 1909}], "google_checks": [{"check": "Top result for the business name", "result": "Pass", "detail": "#1 on Google UK for \"classichaul\", with sitelinks and a business panel"}, {"check": "Google Business Profile", "result": "Pass", "detail": "5.0 stars from 53 reviews"}, {"check": "Map results for \"covered car transport sussex\"", "result": "Pass", "detail": "First of the three businesses Google shows on the map"}, {"check": "Map results for \"enclosed car transport surrey\"", "result": "Pass", "detail": "Second of the three businesses Google shows on the map"}, {"check": "Page one for \"classic car transport uk\"", "result": "Pass", "detail": "Fourth organic result, against national specialists"}, {"check": "Technical SEO score", "result": "Pass", "detail": "Google Lighthouse SEO 100/100 on mobile and desktop"}, {"check": "Sitemap and robots.txt", "result": "Pass", "detail": "8 pages in the sitemap, all open to search engines"}, {"check": "One secure web address", "result": "Pass", "detail": "All four versions of the address forward to https://www.classichaul.co.uk"}, {"check": "Every page has a good title and description", "result": "Fail", "detail": "The Car Delivery page has a two-word title and no description; the homepage title and description are too long for Google to show in full"}, {"check": "One main heading per page", "result": "Fail", "detail": "Every page has several main headings, some of them empty"}, {"check": "Images described for Google", "result": "Fail", "detail": "38 of 42 images have no description (alt text)"}, {"check": "Business details consistent", "result": "Fail", "detail": "The phone number in the site's Google markup differs from the one on the site and Google profile; the homepage says near Guildford while the business is listed in West Sussex"}, {"check": "Fresh content", "result": "Fail", "detail": "The latest news post is from March 2020"}], "ai_checks": [{"check": "ChatGPT recommends the business", "result": "Pass", "detail": "First choice in both questions asked: local to Horsham, and the South East"}, {"check": "Google AI Mode recommends the business", "result": "Pass", "detail": "Named in the top three for the best covered car transport company in West Sussex"}, {"check": "AI and search crawlers allowed", "result": "Pass", "detail": "robots.txt allows all major crawlers"}, {"check": "AI summary file (llms.txt)", "result": "Pass", "detail": "Published, with a clear description of the business"}, {"check": "Business details marked up", "result": "Pass", "detail": "LocalBusiness markup on the homepage"}, {"check": "Strong reviews", "result": "Pass", "detail": "5.0 stars from 53 Google reviews"}, {"check": "Reviews shown on the website", "result": "Fail", "detail": "Google reviews are not shown anywhere on the site"}, {"check": "Question-and-answer content", "result": "Fail", "detail": "No FAQ section on any page"}, {"check": "Same business details everywhere", "result": "Fail", "detail": "Two phone numbers and two locations appear across the site and its markup"}], "rankings": [{"search": "classichaul", "where": "Google UK", "position": 1, "shown_as": "#1", "note": "Top result, sitelinks and business panel"}, {"search": "covered car transport sussex", "where": "Google Maps", "position": 1, "shown_as": "#1", "note": "Map results, 5.0 stars (53)"}, {"search": "covered car transport sussex", "where": "Google UK", "position": 3, "shown_as": "#3", "note": "Organic result"}, {"search": "enclosed car transport surrey", "where": "Google Maps", "position": 2, "shown_as": "#2", "note": "Map results"}, {"search": "enclosed car transport surrey", "where": "Google UK", "position": 3, "shown_as": "#3", "note": "Organic result"}, {"search": "classic car transport uk", "where": "Google UK", "position": 4, "shown_as": "#4", "note": "Organic result, national search"}, {"search": "car transport west sussex", "where": "Google UK", "position": 4, "shown_as": "#4", "note": "Organic result"}, {"search": "best covered car transport company in west sussex", "where": "Google AI Mode", "position": 3, "shown_as": "Top 3", "note": "Named alongside two other companies"}, {"search": "covered classic car transport or 24/7 recovery near Horsham", "where": "ChatGPT", "position": 1, "shown_as": "#1 of 5", "note": "First call if protecting the car is the priority"}, {"search": "best UK companies for enclosed classic car transport, South East", "where": "ChatGPT", "position": 1, "shown_as": "#1 of 6", "note": "Best all-round starting point"}], "reviews": [{"platform": "Google", "rating": 5.0, "reviews": 53}], "security_checks": [{"check": "Email domain protection", "result": "Fail", "risk": "High", "detail": "The domain can be used to send fake emails that appear to come from the business"}, {"check": "Browser security settings", "result": "Fail", "risk": "Low", "detail": "Some recommended browser protections are not switched on"}, {"check": "Secure connection (HTTPS)", "result": "Pass", "risk": "", "detail": "Valid certificate that renews automatically, with HTTPS enforced"}, {"check": "Modern encryption only", "result": "Pass", "risk": "", "detail": "Outdated encryption versions are refused"}, {"check": "Managed, updated platform", "result": "Pass", "risk": "", "detail": "Hosting and software updates are handled by the website platform"}], "uptime": [{"time": "2026-10-21T19:09:42+01:00", "status": 200, "response_ms": 241}, {"time": "2026-10-21T19:09:57+01:00", "status": 200, "response_ms": 1286}, {"time": "2026-10-21T19:10:14+01:00", "status": 200, "response_ms": 250}, {"time": "2026-10-21T19:10:29+01:00", "status": 200, "response_ms": 280}, {"time": "2026-10-21T19:10:44+01:00", "status": 200, "response_ms": 302}, {"time": "2026-10-21T19:11:00+01:00", "status": 200, "response_ms": 163}, {"time": "2026-10-21T19:11:15+01:00", "status": 200, "response_ms": 282}, {"time": "2026-10-21T19:11:30+01:00", "status": 200, "response_ms": 523}, {"time": "2026-10-21T19:11:46+01:00", "status": 200, "response_ms": 1436}, {"time": "2026-10-21T19:12:02+01:00", "status": 200, "response_ms": 176}, {"time": "2026-10-21T19:12:17+01:00", "status": 200, "response_ms": 1377}, {"time": "2026-10-21T19:12:34+01:00", "status": 200, "response_ms": 194}, {"time": "2026-10-21T19:12:49+01:00", "status": 200, "response_ms": 277}, {"time": "2026-10-21T19:13:04+01:00", "status": 200, "response_ms": 1455}, {"time": "2026-10-21T19:13:21+01:00", "status": 200, "response_ms": 253}, {"time": "2026-10-21T19:13:36+01:00", "status": 200, "response_ms": 246}, {"time": "2026-10-21T19:13:52+01:00", "status": 200, "response_ms": 1199}, {"time": "2026-10-21T19:14:08+01:00", "status": 200, "response_ms": 161}, {"time": "2026-10-21T19:14:23+01:00", "status": 200, "response_ms": 199}, {"time": "2026-10-21T19:14:38+01:00", "status": 200, "response_ms": 2575}, {"time": "2026-10-21T19:14:56+01:00", "status": 200, "response_ms": 184}, {"time": "2026-10-21T19:15:11+01:00", "status": 200, "response_ms": 544}, {"time": "2026-10-21T19:15:27+01:00", "status": 200, "response_ms": 213}, {"time": "2026-10-21T19:15:42+01:00", "status": 200, "response_ms": 267}, {"time": "2026-10-21T19:15:57+01:00", "status": 200, "response_ms": 810}, {"time": "2026-10-21T19:16:13+01:00", "status": 200, "response_ms": 2666}, {"time": "2026-10-21T19:16:31+01:00", "status": 200, "response_ms": 209}, {"time": "2026-10-21T19:16:46+01:00", "status": 200, "response_ms": 233}, {"time": "2026-10-21T19:17:01+01:00", "status": 200, "response_ms": 192}, {"time": "2026-10-21T19:17:17+01:00", "status": 200, "response_ms": 468}, {"time": "2026-10-21T19:17:32+01:00", "status": 200, "response_ms": 663}, {"time": "2026-10-21T19:17:48+01:00", "status": 200, "response_ms": 497}, {"time": "2026-10-21T19:18:04+01:00", "status": 200, "response_ms": 380}, {"time": "2026-10-21T19:18:19+01:00", "status": 200, "response_ms": 200}, {"time": "2026-10-21T19:18:34+01:00", "status": 200, "response_ms": 264}, {"time": "2026-10-21T19:18:50+01:00", "status": 200, "response_ms": 453}, {"time": "2026-10-21T19:19:05+01:00", "status": 200, "response_ms": 455}, {"time": "2026-10-21T19:19:21+01:00", "status": 200, "response_ms": 2011}, {"time": "2026-10-21T19:19:38+01:00", "status": 200, "response_ms": 127}, {"time": "2026-10-21T19:19:53+01:00", "status": 200, "response_ms": 160}]};
+const calcs={},subs=[];
+const rows=(id)=>{ if(RAW[id]) return RAW[id]; if(calcs[id]){ const c=calcs[id]; return c.fn(...c.inputs.map(rows)); } return null; };
+window.dash={
+  colors:['var(--c1)','var(--c2)','#7a5fc0','#2e9e8f','#c0507a','#8a8f3a','#5a7d9a','#b5651d'],
+  data(id){ const d=rows(id); return d==null?{status:'missing',data:[]}:{status:'ok',data:d,columns:d.length?Object.keys(d[0]):[],meta:[]}; },
+  calc(id,o){ calcs[id]=o; },
+  onData(fn){ subs.push(fn); const run=()=>{ document.querySelectorAll('.dash-skeleton').forEach(e=>e.classList.remove('dash-skeleton')); fn(); };
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',run); else run();
+    let w=window.innerWidth; window.addEventListener('resize',()=>{ if(window.innerWidth!==w){w=window.innerWidth; fn();} }); },
+  refresh(){}, params(){return {};}, setParams(){}, resetParams(){}, setLink(){}
+};
+})();
+</script>
+</head><body><div id="dash-root">
+<style>
+.bv { display: grid; gap: var(--cds-gap-xl); font-family: var(--font-sans); max-width: 72rem; margin-inline: auto; }
+.bv h1 { font-family: var(--font-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.bv h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.bv h3 { font-size: var(--cds-font-size-body); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.bv-head { display: grid; gap: var(--cds-gap-sm); }
+.bv-sub, .bv-note { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); margin: 0; }
+.bv-take { margin: 0; max-width: 62ch; font-size: var(--cds-font-size-body); }
+.bv-tiles { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 8.5rem), 1fr)); }
+.bv-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-md) var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.bv-tile.lead { border-color: var(--color-fg-muted); }
+.bv-label { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); letter-spacing: .02em; }
+.bv-big { font-family: var(--font-serif); font-weight: 400; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; line-height: 1.1; }
+.bv-tile.lead .bv-big { font-size: calc(var(--cds-font-size-title) * 1.5); }
+.bv-of { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-family: var(--font-sans); }
+.bv-meter { height: 6px; border-radius: 3px; background: var(--cds-chart-grid); overflow: hidden; }
+.bv-meter > i { display: block; height: 100%; border-radius: 3px; width: 0; }
+.bv-grade { font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); }
+.bv-sec { display: grid; gap: var(--cds-gap-md); }
+.bv-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); }
+.bv-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-md); align-content: start; min-width: 0; }
+.bv-cardhead { display: grid; gap: var(--cds-gap-xs); }
+.bv-scroll { overflow-x: auto; }
+.bv table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); }
+.bv th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+.bv td { padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.bv tr:last-child td { border-bottom: 0; }
+.bv-pill { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); font-weight: var(--cds-font-weight-medium); white-space: nowrap; border: 1px solid currentColor; }
+.bv-pill.ok { color: var(--color-ok); } .bv-pill.warn { color: var(--color-warn); } .bv-pill.bad { color: var(--color-bad); }
+.bv-checks { display: grid; gap: 0; }
+.bv-check { display: grid; grid-template-columns: auto 1fr; gap: var(--cds-gap-sm); padding: var(--cds-pad-sm) 0; border-bottom: 1px solid var(--color-border-line); }
+.bv-check:last-child { border-bottom: 0; }
+.bv-check .bv-dot { width: 1.25rem; height: 1.25rem; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 700; margin-top: 1px; }
+.bv-check.pass .bv-dot { color: var(--color-ok); border: 1.5px solid var(--color-ok); }
+.bv-check.fail .bv-dot { color: var(--color-warn); border: 1.5px solid var(--color-warn); }
+.bv-check p { margin: 2px 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.bv-tally { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); font-variant-numeric: tabular-nums; }
+.bv-chart { position: relative; min-height: 220px; }
+.bv-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+.bv-tip .t { color: var(--cds-text-secondary); }
+.bv-vitals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr)); gap: var(--cds-gap-sm); }
+.bv-vital { display: grid; gap: 2px; padding: var(--cds-pad-sm); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); }
+.bv-vital b { font-family: var(--font-serif); font-weight: 400; font-size: var(--cds-font-size-heading); font-variant-numeric: tabular-nums; }
+.bv-legend { display: flex; gap: var(--cds-gap-md); flex-wrap: wrap; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.bv-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.bv-legend i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.bv-method { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); display: grid; gap: var(--cds-gap-xs); max-width: 72ch; }
+.bv-method p { margin: 0; }
+.bv-fail { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 120px; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.bv-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+@media (prefers-reduced-motion: no-preference) { .bv-meter > i { transition: width var(--cds-dur-slow) var(--cds-ease-out); } }
+</style>
+
+<div class="bv">
+  <header class="bv-head" id="top">
+    <p class="bv-sub">classichaul.co.uk · Website health report</p>
+    <h1>ClassicHaul website report</h1>
+    <p class="bv-take dash-skeleton" id="takeaway" data-source="scores">—</p>
+    <p class="bv-sub dash-skeleton" id="when" data-source="uptime_summary">—</p>
+  </header>
+
+  <section class="bv-tiles" id="tiles" aria-label="Headline scores">
+    <div class="bv-tile lead">
+      <span class="bv-label">Overall rating</span>
+      <span><span class="bv-big dash-skeleton" data-source="scores" data-field="score" data-where="area=Overall">—</span> <span class="bv-of">/ 100</span></span>
+      <div class="bv-meter"><i data-meter="Overall"></i></div>
+      <span class="bv-grade" data-grade="Overall"></span>
+    </div>
+    <div class="bv-tile">
+      <span class="bv-label">Google visibility (SEO)</span>
+      <span><span class="bv-big dash-skeleton" data-source="scores" data-field="score" data-where="area=Google visibility">—</span> <span class="bv-of">/ 100</span></span>
+      <div class="bv-meter"><i data-meter="Google visibility"></i></div>
+      <span class="bv-grade" data-grade="Google visibility"></span>
+    </div>
+    <div class="bv-tile">
+      <span class="bv-label">AI visibility (AEO)</span>
+      <span><span class="bv-big dash-skeleton" data-source="scores" data-field="score" data-where="area=AI visibility">—</span> <span class="bv-of">/ 100</span></span>
+      <div class="bv-meter"><i data-meter="AI visibility"></i></div>
+      <span class="bv-grade" data-grade="AI visibility"></span>
+    </div>
+    <div class="bv-tile">
+      <span class="bv-label">Speed</span>
+      <span><span class="bv-big dash-skeleton" data-source="scores" data-field="score" data-where="area=Speed">—</span> <span class="bv-of">/ 100</span></span>
+      <div class="bv-meter"><i data-meter="Speed"></i></div>
+      <span class="bv-grade" data-grade="Speed"></span>
+    </div>
+    <div class="bv-tile">
+      <span class="bv-label">Security</span>
+      <span><span class="bv-big dash-skeleton" data-source="scores" data-field="score" data-where="area=Security">—</span> <span class="bv-of">/ 100</span></span>
+      <div class="bv-meter"><i data-meter="Security"></i></div>
+      <span class="bv-grade" data-grade="Security"></span>
+    </div>
+    <div class="bv-tile">
+      <span class="bv-label">Uptime while monitored</span>
+      <span class="bv-big dash-skeleton" data-source="uptime_summary" data-field="availability">—</span>
+      <span class="bv-of dash-skeleton" data-source="uptime_summary" data-field="avg_ms" id="avgms">—</span>
+    </div>
+    <div class="bv-tile">
+      <span class="bv-label">Google reviews</span>
+      <span><span class="bv-big dash-skeleton" data-source="reviews" data-field="rating" data-where="platform=Google">—</span> <span class="bv-of">★</span></span>
+      <span class="bv-of dash-skeleton" data-source="reviews" data-field="reviews" data-where="platform=Google" id="revcount">—</span>
+    </div>
+  </section>
+
+  <section class="bv-sec" id="found">
+    <h2>How customers find the business</h2>
+    <div class="bv-card">
+      <div class="bv-cardhead">
+        <h3>Where the business appears for real customer searches</h3>
+        <p class="bv-note">Searched from the UK on 21 October 2026. Positions move day to day, and AI answers vary between people and sessions.</p>
+      </div>
+      <div class="bv-scroll">
+        <table id="rank-table" data-source="rankings" data-row-key="search,where">
+          <thead><tr>
+            <th data-field="search">Search</th>
+            <th data-field="where">Where</th>
+            <th data-field="shown_as">Position</th>
+            <th data-field="note">Detail</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="bv-sec" id="checks">
+    <h2>What drives the visibility scores</h2>
+    <div class="bv-grid">
+      <div class="bv-card" id="google-card">
+        <div class="bv-cardhead">
+          <h3>Google (SEO)</h3>
+          <span class="bv-tally" id="g-tally" data-source="scores" data-field="detail" data-where="area=Google visibility">—</span>
+        </div>
+        <div class="bv-checks" id="g-checks" data-source="google_checks"></div>
+      </div>
+      <div class="bv-card" id="ai-card">
+        <div class="bv-cardhead">
+          <h3>ChatGPT and AI search (AEO)</h3>
+          <span class="bv-tally" id="a-tally" data-source="scores" data-field="detail" data-where="area=AI visibility">—</span>
+        </div>
+        <div class="bv-checks" id="a-checks" data-source="ai_checks"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bv-sec" id="security">
+    <h2>Security</h2>
+    <div class="bv-card">
+      <div class="bv-cardhead">
+        <h3>Security risks found</h3>
+        <span class="bv-tally" id="s-tally" data-source="scores" data-field="detail" data-where="area=Security">—</span>
+      </div>
+      <div class="bv-checks" id="s-checks" data-source="security_checks"></div>
+      <p class="bv-note">Details of each risk have been kept off this report. They can be fixed on request.</p>
+    </div>
+  </section>
+
+  <section class="bv-sec" id="speed">
+    <h2>Speed and quality</h2>
+    <div class="bv-grid">
+      <div class="bv-card">
+        <div class="bv-cardhead">
+          <h3>Google Lighthouse scores</h3>
+          <p class="bv-note">Google's own test of the homepage, out of 100. Ninety and above is rated good.</p>
+        </div>
+        <div class="bv-legend" id="lh-legend" data-source="lighthouse"></div>
+        <div class="bv-chart" id="lh-chart" data-source="lighthouse"></div>
+      </div>
+      <div class="bv-card">
+        <div class="bv-cardhead">
+          <h3>Load times</h3>
+          <p class="bv-note">How long the homepage takes before the main content is visible. Google treats 2.5 seconds or less as good.</p>
+        </div>
+        <div class="bv-vitals">
+          <div class="bv-vital"><span class="bv-label">Mobile · main content shown</span><b class="dash-skeleton" data-source="lighthouse" data-field="lcp_s" data-where="device=Mobile">—</b></div>
+          <div class="bv-vital"><span class="bv-label">Desktop · main content shown</span><b class="dash-skeleton" data-source="lighthouse" data-field="lcp_s" data-where="device=Desktop">—</b></div>
+          <div class="bv-vital"><span class="bv-label">Mobile · first text shown</span><b class="dash-skeleton" data-source="lighthouse" data-field="fcp_s" data-where="device=Mobile">—</b></div>
+          <div class="bv-vital"><span class="bv-label">Desktop · first text shown</span><b class="dash-skeleton" data-source="lighthouse" data-field="fcp_s" data-where="device=Desktop">—</b></div>
+          <div class="bv-vital"><span class="bv-label">Layout stability (mobile)</span><b class="dash-skeleton" data-source="lighthouse" data-field="cls" data-where="device=Mobile">—</b></div>
+          <div class="bv-vital"><span class="bv-label">Page size (mobile)</span><b class="dash-skeleton" data-source="lighthouse" data-field="page_kb" data-where="device=Mobile">—</b></div>
+        </div>
+        <p class="bv-note">Desktop loads quickly. On a phone the main content takes far longer than Google's target to appear, which is the biggest improvement available.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bv-sec" id="uptime">
+    <h2>Uptime and response</h2>
+    <div class="bv-card">
+      <div class="bv-cardhead">
+        <h3>Homepage checks during the audit</h3>
+        <p class="bv-note dash-skeleton" id="up-note" data-source="uptime_summary" data-field="checks">—</p>
+      </div>
+      <div class="bv-chart" id="up-chart" data-source="uptime"></div>
+      <p class="bv-note">This is a snapshot taken during the audit, not a long-term uptime record. A monitoring service would track availability around the clock.</p>
+    </div>
+  </section>
+
+  <section class="bv-sec" id="method">
+    <h2>How the scores are worked out</h2>
+    <div class="bv-method">
+      <p>Google visibility and AI visibility are the share of checks passed in the lists above. Speed is the average of Google Lighthouse performance on mobile and desktop.</p>
+      <p>Security is the share of security checks passed.</p>
+      <p>The overall rating is the average of six scores: Google visibility, AI visibility, security, speed, accessibility and best practice. The last three come from Google Lighthouse.</p>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('scores', {
+  inputs: ['lighthouse', 'google_checks', 'ai_checks', 'security_checks'],
+  title: 'Scores out of 100',
+  description: 'Share of checks passed for Google, AI and security; Lighthouse averages for the rest; overall is the mean of the six.',
+  fn: (lighthouse, google_checks, ai_checks, security_checks) => {
+    const share = (rows) => Math.round(100 * rows.filter(r => r.result === 'Pass').length / rows.length);
+    const avg = (k) => Math.round(lighthouse.reduce((s, r) => s + Number(r[k]), 0) / lighthouse.length);
+    const g = share(google_checks), a = share(ai_checks);
+    const parts = [
+      {area: 'Security', score: share(security_checks), detail: security_checks.filter(r => r.result !== 'Pass').length + ' risks found: ' + ['High', 'Medium', 'Low'].map(l => security_checks.filter(r => r.risk === l).length + ' ' + l.toLowerCase()).filter(t => t[0] !== '0').join(', ')},
+      {area: 'Google visibility', score: g, detail: google_checks.filter(r => r.result === 'Pass').length + ' of ' + google_checks.length + ' checks passed'},
+      {area: 'AI visibility', score: a, detail: ai_checks.filter(r => r.result === 'Pass').length + ' of ' + ai_checks.length + ' checks passed'},
+      {area: 'Speed', score: avg('performance'), detail: 'Lighthouse performance, mobile and desktop'},
+      {area: 'Accessibility', score: avg('accessibility'), detail: 'Lighthouse accessibility'},
+      {area: 'Best practice', score: avg('best_practices'), detail: 'Lighthouse best practices'}
+    ];
+    const overall = Math.round(parts.reduce((s, p) => s + p.score, 0) / parts.length);
+    return [{area: 'Overall', score: overall, detail: 'Average of the six scores'}, ...parts];
+  }
+});
+
+dash.calc('uptime_summary', {
+  inputs: ['uptime'],
+  title: 'Uptime during the audit',
+  description: 'Share of homepage checks that returned a page, and the average response time.',
+  fn: (uptime) => {
+    const up = uptime.filter(r => Number(r.status) === 200);
+    const ms = up.map(r => Number(r.response_ms));
+    return [{
+      checks: uptime.length,
+      up: up.length,
+      availability: uptime.length ? up.length / uptime.length : null,
+      avg_ms: ms.length ? Math.round(ms.reduce((s, v) => s + v, 0) / ms.length) : null,
+      from: uptime.length ? uptime[0].time : null,
+      to: uptime.length ? uptime[uptime.length - 1].time : null
+    }];
+  }
+});
+
+(function () {
+  const root = document.querySelector('.bv');
+  const $ = (s) => root.querySelector(s);
+  const $$ = (s) => Array.from(root.querySelectorAll(s));
+  const grade = (s) => s >= 90 ? ['Excellent', 'ok', 'var(--color-ok)'] : s >= 75 ? ['Good', 'ok', 'var(--color-ok)'] : s >= 50 ? ['Room to improve', 'warn', 'var(--color-warn)'] : ['Needs work', 'bad', 'var(--color-bad)'];
+  const unsk = (el) => el && el.classList.remove('dash-skeleton');
+  const failLine = (el) => { el.innerHTML = ''; const d = document.createElement('div'); d.className = 'bv-fail'; d.textContent = 'Failed to load'; el.appendChild(d); };
+  const pct = d3.format('.0%');
+  const fmtTime = (t) => { const d = new Date(t); return isNaN(d) ? String(t) : d.toLocaleTimeString('en-GB', {hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Europe/London'}); };
+  let tip = null;
+  const getTip = (box) => { if (!tip || tip.parentNode !== box) { tip = document.createElement('div'); tip.className = 'bv-tip'; tip.hidden = true; box.appendChild(tip); } return tip; };
+
+  function drawScores() {
+    const s = dash.data('scores');
+    if (s.status !== 'ok') { if (s.status === 'error') $$('[data-source="scores"]').forEach(unsk); return; }
+    const by = Object.fromEntries(s.data.map(r => [r.area, r]));
+    $$('[data-source="scores"][data-field="score"]').forEach(el => { const r = by[el.dataset.where.split('=')[1]]; el.textContent = r ? r.score : '—'; unsk(el); });
+    $$('[data-meter]').forEach(el => { const r = by[el.dataset.meter]; if (!r) return; const g = grade(r.score); el.style.width = r.score + '%'; el.style.background = g[2]; });
+    $$('[data-grade]').forEach(el => { const r = by[el.dataset.grade]; if (!r) return; const g = grade(r.score); el.textContent = g[0]; el.style.color = g[2]; });
+    if (by['Security'] && /high/.test(by['Security'].detail)) {
+      const gs = $('[data-grade="Security"]'); gs.textContent = 'At risk'; gs.style.color = 'var(--color-bad)';
+      $('[data-meter="Security"]').style.background = 'var(--color-bad)';
+    }
+    $('#s-tally').textContent = by['Security'].detail;
+    $('#g-tally').textContent = by['Google visibility'].detail;
+    $('#a-tally').textContent = by['AI visibility'].detail;
+    const o = by['Overall'], gv = by['Google visibility'], av = by['AI visibility'];
+    const tk = $('#takeaway');
+    const sc = by['Security'];
+    tk.textContent = 'Overall the site rates ' + grade(o.score)[0].toLowerCase() + ' at ' + o.score + ' out of 100. The audit found security risks that need attention (' + sc.detail.split(': ')[1] + '). ClassicHaul is the first company ChatGPT recommends for enclosed classic car transport, and it appears on Google\'s first page for its key searches. The biggest gains are mobile speed (' + by['Speed'].score + ') and tidying up the pages Google reads (' + gv.score + ').';
+    unsk(tk);
+  }
+
+  function drawUptime() {
+    const s = dash.data('uptime_summary');
+    const box = $('#up-chart');
+    if (s.status === 'ok' && s.data.length) {
+      const r = s.data[0];
+      const av = $('[data-source="uptime_summary"][data-field="availability"]');
+      av.textContent = r.availability == null ? '—' : pct(r.availability); unsk(av);
+      const am = $('#avgms'); am.textContent = r.avg_ms == null ? '—' : 'Average response ' + d3.format(',')(r.avg_ms) + ' ms'; unsk(am);
+      const n = $('#up-note'); n.textContent = d3.format(',')(r.checks) + ' checks, one every 15 seconds, ' + d3.format(',')(r.up) + ' answered. Bars show how long the server took to respond.'; unsk(n);
+      const w = $('#when'); w.textContent = 'Audited 21 October 2026, ' + fmtTime(r.from) + ' to ' + fmtTime(r.to) + ' UK time'; unsk(w);
+    } else if (s.status === 'error') { $$('[data-source="uptime_summary"]').forEach(unsk); }
+
+    const u = dash.data('uptime');
+    box.innerHTML = '';
+    if (u.status === 'error') { failLine(box); return; }
+    if (u.status !== 'ok') return;
+    const rows = u.data.map(d => ({time: d.time, t: new Date(d.time), ok: Number(d.status) === 200, ms: Number(d.response_ms)}));
+    const W = Math.max(280, box.clientWidth), H = 220, m = {t: 10, r: 8, b: 26, l: 8};
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Response time for each homepage check');
+    const yMax = d3.max(rows, d => d.ms) || 1;
+    const y = d3.scaleLinear([0, yMax * 1.15], [H - m.b, m.t]).nice();
+    const yt = svg.append('g');
+    const ticks = y.ticks(4);
+    const tl = yt.selectAll('text').data(ticks).join('text').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d => d + ' ms');
+    let lw = 0; tl.each(function () { lw = Math.max(lw, this.getComputedTextLength()); });
+    m.l = lw + 10;
+    tl.attr('x', m.l - 6).attr('y', d => y(d) + 4).attr('text-anchor', 'end');
+    yt.selectAll('line').data(ticks).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', d => y(d)).attr('y2', d => y(d)).attr('stroke', 'var(--cds-chart-grid)');
+    const x = d3.scaleBand(rows.map((d, i) => i), [m.l, W - m.r]).padding(0.25);
+    svg.append('g').selectAll('rect').data(rows).join('rect')
+      .attr('x', (d, i) => x(i)).attr('width', x.bandwidth())
+      .attr('y', d => d.ok ? y(d.ms) : m.t).attr('height', d => d.ok ? (H - m.b) - y(d.ms) : (H - m.b) - m.t)
+      .attr('rx', 2).attr('fill', d => d.ok ? dash.colors[0] : 'var(--cds-chart-status-critical)')
+      .on('mousemove', function (ev, d) {
+        const t = getTip(box); t.hidden = false; t.innerHTML = '';
+        const a = document.createElement('div'); a.className = 't'; a.textContent = fmtTime(d.time); t.appendChild(a);
+        const b = document.createElement('div'); b.textContent = d.ok ? 'Up · ' + d3.format(',')(d.ms) + ' ms' : 'No response'; t.appendChild(b);
+        const [px, py] = d3.pointer(ev, box); const tw = t.offsetWidth;
+        t.style.left = Math.min(Math.max(0, px + 10), box.clientWidth - tw) + 'px'; t.style.top = Math.max(0, py - 40) + 'px';
+      })
+      .on('mouseleave', () => { if (tip) tip.hidden = true; });
+    const ends = [0, rows.length - 1];
+    svg.append('g').selectAll('text').data(ends).join('text').attr('x', (i, k) => k ? W - m.r : x(0)).attr('y', H - 8).attr('text-anchor', (i, k) => k ? 'end' : 'start').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(i => fmtTime(rows[i].time));
+  }
+
+  function drawLighthouse() {
+    const s = dash.data('lighthouse');
+    const box = $('#lh-chart'), leg = $('#lh-legend');
+    box.innerHTML = ''; leg.innerHTML = '';
+    $$('[data-source="lighthouse"][data-field]').forEach(el => {
+      if (s.status !== 'ok') { if (s.status === 'error') unsk(el); return; }
+      const r = s.data.find(d => d.device === el.dataset.where.split('=')[1]); if (!r) return;
+      const f = el.dataset.field, v = Number(r[f]);
+      el.textContent = f === 'page_kb' ? d3.format(',')(v) + ' KB' : f === 'cls' ? d3.format('.3~f')(v) + (v <= 0.1 ? ' · good' : '') : v.toFixed(1) + ' s';
+      if (f === 'lcp_s') el.style.color = v <= 2.5 ? 'var(--color-ok)' : v <= 4 ? 'var(--color-warn)' : 'var(--color-bad)';
+      unsk(el);
+    });
+    if (s.status === 'error') { failLine(box); return; }
+    if (s.status !== 'ok') return;
+    const cats = [['performance', 'Performance'], ['accessibility', 'Accessibility'], ['best_practices', 'Best practice'], ['seo', 'SEO']];
+    const devs = s.data.map(d => d.device);
+    devs.forEach((d, i) => { const sp = document.createElement('span'); const sw = document.createElement('i'); sw.style.background = dash.colors[i]; sp.appendChild(sw); sp.appendChild(document.createTextNode(d)); leg.appendChild(sp); });
+    const W = Math.max(280, box.clientWidth), rowH = 44, m = {t: 4, r: 36, b: 22, l: 0};
+    const H = m.t + cats.length * rowH + m.b;
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Lighthouse scores by device');
+    const lab = svg.append('g').selectAll('text').data(cats).join('text').attr('fill', 'var(--color-fg)').attr('font-size', 12).text(d => d[1]);
+    let lw = 0; lab.each(function () { lw = Math.max(lw, this.getComputedTextLength()); });
+    m.l = lw + 12;
+    const y = d3.scaleBand(cats.map(c => c[0]), [m.t, H - m.b]).paddingInner(0.3);
+    const yi = d3.scaleBand(devs, [0, y.bandwidth()]).padding(0.12);
+    const x = d3.scaleLinear([0, 100], [m.l, W - m.r]);
+    lab.attr('x', 0).attr('y', d => y(d[0]) + y.bandwidth() / 2 + 4);
+    svg.append('g').selectAll('line').data([0, 50, 90, 100]).join('line').attr('x1', d => x(d)).attr('x2', d => x(d)).attr('y1', m.t).attr('y2', H - m.b).attr('stroke', d => d === 90 ? 'var(--cds-chart-reference)' : 'var(--cds-chart-grid)').attr('stroke-dasharray', d => d === 90 ? '3 3' : null);
+    svg.append('g').selectAll('text').data([0, 50, 90, 100]).join('text').attr('x', d => x(d)).attr('y', H - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(d => d);
+    const g = svg.append('g');
+    cats.forEach(([k]) => {
+      s.data.forEach((r, i) => {
+        const v = Number(r[k]), yy = y(k) + yi(r.device);
+        g.append('rect').attr('x', x(0)).attr('y', yy).attr('height', yi.bandwidth()).attr('width', Math.max(0, x(v) - x(0))).attr('rx', 3).attr('fill', dash.colors[i]);
+        g.append('text').attr('x', x(v) + 4).attr('y', yy + yi.bandwidth() / 2 + 4).attr('fill', 'var(--color-fg-muted)').attr('font-size', 11).text(v);
+      });
+    });
+  }
+
+  function drawChecks(id, el) {
+    const s = dash.data(id);
+    el.innerHTML = '';
+    if (s.status === 'error') { failLine(el); return; }
+    if (s.status !== 'ok') return;
+    s.data.forEach(r => {
+      const pass = r.result === 'Pass';
+      const row = document.createElement('div'); row.className = 'bv-check ' + (pass ? 'pass' : 'fail');
+      const dot = document.createElement('span'); dot.className = 'bv-dot'; dot.textContent = pass ? '✓' : '!'; dot.setAttribute('aria-label', pass ? 'Passed' : 'To improve');
+      const body = document.createElement('div');
+      const h = document.createElement('div'); h.textContent = r.check;
+      if (r.risk) { const pl = document.createElement('span'); pl.className = 'bv-pill ' + (r.risk === 'High' ? 'bad' : r.risk === 'Medium' ? 'warn' : 'ok'); pl.style.marginLeft = '8px'; pl.textContent = r.risk + ' risk'; h.appendChild(pl); if (r.risk === 'High') { dot.style.color = 'var(--color-bad)'; dot.style.borderColor = 'var(--color-bad)'; } }
+      const p = document.createElement('p'); p.textContent = r.detail;
+      body.appendChild(h); body.appendChild(p); row.appendChild(dot); row.appendChild(body); el.appendChild(row);
+    });
+  }
+
+  function drawRankings() {
+    const s = dash.data('rankings');
+    const tb = $('#rank-table tbody'); tb.innerHTML = '';
+    if (s.status === 'error') { const tr = document.createElement('tr'); const td = document.createElement('td'); td.colSpan = 4; failLine(td); tr.appendChild(td); tb.appendChild(tr); return; }
+    if (s.status !== 'ok') return;
+    s.data.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.dataset.key = encodeURIComponent(r.search) + ',' + encodeURIComponent(r.where);
+      const c1 = document.createElement('td'); c1.textContent = r.search;
+      const c2 = document.createElement('td'); c2.textContent = r.where;
+      const c3 = document.createElement('td'); const pill = document.createElement('span');
+      const pos = r.position == null ? null : Number(r.position);
+      pill.className = 'bv-pill ' + (pos == null ? 'warn' : pos <= 3 ? 'ok' : pos <= 10 ? 'ok' : 'warn');
+      pill.textContent = r.shown_as; c3.appendChild(pill);
+      const c4 = document.createElement('td'); c4.textContent = r.note; c4.className = 'bv-note';
+      [c1, c2, c3, c4].forEach(c => tr.appendChild(c)); tb.appendChild(tr);
+    });
+  }
+
+  function drawReviews() {
+    const s = dash.data('reviews');
+    const els = $$('[data-source="reviews"]');
+    if (s.status !== 'ok') { if (s.status === 'error') els.forEach(unsk); return; }
+    const r = s.data.find(d => d.platform === 'Google');
+    els.forEach(el => {
+      if (!r) { el.textContent = '—'; } else if (el.dataset.field === 'rating') { el.textContent = Number(r.rating).toFixed(1); } else { el.textContent = 'From ' + d3.format(',')(Number(r.reviews)) + ' Google reviews'; }
+      unsk(el);
+    });
+  }
+
+  dash.onData(() => {
+    drawReviews();
+    drawScores();
+    drawUptime();
+    drawLighthouse();
+    drawChecks('google_checks', $('#g-checks'));
+    drawChecks('ai_checks', $('#a-checks'));
+    drawChecks('security_checks', $('#s-checks'));
+    drawRankings();
+  });
+})();
+</script>
+
+<p class="bv-foot">Independent website audit · 21 October 2026</p>
+</div></body></html>
