@@ -123,10 +123,11 @@ window.dash={
       <span class="bv-grade" data-grade="AI visibility"></span>
     </div>
     <div class="bv-tile">
-      <span class="bv-label">Speed</span>
-      <span><span class="bv-big dash-skeleton" data-source="scores" data-field="score" data-where="area=Speed">—</span> <span class="bv-of">/ 100</span></span>
-      <div class="bv-meter"><i data-meter="Speed"></i></div>
-      <span class="bv-grade" data-grade="Speed"></span>
+      <span class="bv-label">Speed on mobile</span>
+      <span><span class="bv-big" id="spd-m">—</span> <span class="bv-of">/ 100</span></span>
+      <div class="bv-meter"><i id="spd-m-meter"></i></div>
+      <span class="bv-grade" id="spd-m-grade"></span>
+      <span class="bv-of" id="spd-d"></span>
     </div>
     <div class="bv-tile">
       <span class="bv-label">Security</span>
@@ -243,7 +244,7 @@ window.dash={
   <section class="bv-sec" id="method">
     <h2>How the scores are worked out</h2>
     <div class="bv-method">
-      <p>Google visibility and AI visibility are the share of checks passed in the lists above. Speed is the average of Google Lighthouse performance on mobile and desktop.</p>
+      <p>Google visibility and AI visibility are the share of checks passed in the lists above. The speed tile shows the mobile score; in the overall rating, speed counts as the average of mobile and desktop Google Lighthouse performance.</p>
       <p>Security is the share of security checks passed.</p>
       <p>The overall rating is the average of six scores: Google visibility, AI visibility, security, speed, accessibility and best practice. The last three come from Google Lighthouse.</p>
     </div>
@@ -319,7 +320,15 @@ dash.calc('uptime_summary', {
     const o = by['Overall'], gv = by['Google visibility'], av = by['AI visibility'];
     const tk = $('#takeaway');
     const sc = by['Security'];
-    tk.textContent = 'Overall the site rates ' + grade(o.score)[0].toLowerCase() + ' at ' + o.score + ' out of 100. The audit found security risks that need attention (' + sc.detail.split(': ')[1] + '). ClassicHaul is the first company ChatGPT recommends for enclosed classic car transport, and it appears on Google\'s first page for its key searches. The biggest gains are mobile speed (' + by['Speed'].score + ') and tidying up the pages Google reads (' + gv.score + ').';
+    const lh = dash.data('lighthouse'); const mob = (lh.data || []).find(d => d.device === 'Mobile') || {}; const desk = (lh.data || []).find(d => d.device === 'Desktop') || {};
+    if (mob.performance != null) {
+      const g = grade(Number(mob.performance));
+      $('#spd-m').textContent = mob.performance;
+      $('#spd-m-meter').style.width = mob.performance + '%'; $('#spd-m-meter').style.background = g[2];
+      $('#spd-m-grade').textContent = g[0]; $('#spd-m-grade').style.color = g[2];
+      $('#spd-d').textContent = 'Desktop ' + desk.performance + ' / 100. Phones wait ' + Number(mob.lcp_s).toFixed(1) + ' s for the main content.';
+    }
+    tk.textContent = 'Overall the site rates ' + grade(o.score)[0].toLowerCase() + ' at ' + o.score + ' out of 100. The audit found security risks that need attention (' + sc.detail.split(': ')[1] + '). ClassicHaul is the first company ChatGPT recommends for enclosed classic car transport, and it appears on Google\'s first page for its key searches. The biggest gains are mobile speed (' + mob.performance + ' out of 100) and tidying up the pages Google reads (' + gv.score + ').';
     unsk(tk);
   }
 
